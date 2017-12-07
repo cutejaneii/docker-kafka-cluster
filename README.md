@@ -9,7 +9,7 @@ There are lots of kafka docker images that help you to run a standalone version 
 
 # Docker image
 ```
-docker pull jeygeethan/kafka-cluster
+docker pull cutejaneii/docker-kafka-cluster
 ```
 
 # Setting up a kafka cluster
@@ -24,6 +24,12 @@ Run these scripts on individual hosts to create a cluster
 ### Node1
 ```
 docker run -p 9092:9092 -e KAFKA_HOST=host_kafka1 -e KAFKA_PORT=9092 -e ZOOKEEPER_CONNECT=10.0.0.1:2181,10.0.0.2:2181,10.0.0.3:2181 -e BROKER_ID=0 --name kafka1 jeygeethan/kafka-cluster
+
+or 
+
+docker run --restart=always -d -p 9092:9092 -e KAFKA_HOST=10.0.0.1 -e KAFKA_PORT=9092 -e ZOOKEEPER_CONNECT=10.0.0.1:2181,10.0.0.2:2181,10.0.0.3:2181 -e KAFKA_ID=0 -e NUM_PARTITIONS=12 -e REPLICA_FACTOR=3 -e OFFSET_REPLICA_FACTOR=3 -e OFFSET_ISR=2 --name kafka-1 cutejaneii/docker-kafka-cluster
+
+
 ```
 ### Node2
 ```
