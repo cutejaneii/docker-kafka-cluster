@@ -49,5 +49,25 @@ if [ ! -z "$DELETE_TOPIC_ENABLE" ]; then
     sed -r -i "s/(delete.topic.enable)=(.*)/\1=$DELETE_TOPIC_ENABLE/g" $KAFKA_HOME/config/server.properties
 fi
 
+# Configure the default num of replication factor for all the topics
+if [ ! -z "$REPLICA_FACTOR" ]; then
+    echo "default.replication.factor: $REPLICA_FACTOR"
+    sed -r -i "s/(default.replication.factor)=(.*)/\1=$REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
+fi
+
+# Configure the default num of replication factor for __customer_offsets
+if [ ! -z "$OFFSET_REPLICA_FACTOR" ]; then
+    echo "transaction.state.log.replication.factor: $OFFSET_REPLICA_FACTOR"
+    sed -r -i "s/(transaction.state.log.replication.factor)=(.*)/\1=$OFFSET_REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
+fi
+
+# Configure ISR for __customer_offsets
+if [ ! -z "$OFFSET_ISR" ]; then
+    echo "transaction.state.log.min.isr: $OFFSET_ISR"
+    sed -r -i "s/(transaction.state.log.min.isr)=(.*)/\1=$OFFSET_ISR/g" $KAFKA_HOME/config/server.properties
+fi
+
+
+
 # Run Kafka
 $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
