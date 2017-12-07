@@ -1,9 +1,9 @@
 FROM java:openjdk-8-jre
-MAINTAINER JEY
+MAINTAINER Jennifer
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV SCALA_VERSION 2.11
-ENV KAFKA_VERSION 0.9.0.1
+ENV KAFKA_VERSION 0.11.0.1
 ENV KAFKA_HOME /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION"
 
 # Install Kafka and other needed things
