@@ -15,8 +15,8 @@ if [ ! -z "$KAFKA_HOST" ]; then
 fi
 
 if [ ! -z "$KAFKA_HOST" ] && [ ! -z "$KAFKA_PORT" ]; then
-    echo "advertised.listeners=PLAINTEXT://: $KAFKA_HOST:$KAFKA_PORT "
-    sed -r -i "s/#(advertised.listeners)=(.*)/\1=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT/g" $KAFKA_HOME/config/server.properties
+    echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT "
+    echo -n "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT " >> $KAFKA_HOME/config/server.properties
 fi
 
 # Set the broker id
@@ -67,8 +67,10 @@ fi
 
 # Configure the default num of replication factor for __customer_offsets
 if [ ! -z "$OFFSET_REPLICA_FACTOR" ]; then
+    echo "offsets.topic.replication.factor: $OFFSET_REPLICA_FACTOR"
     echo "transaction.state.log.replication.factor: $OFFSET_REPLICA_FACTOR"
     sed -r -i "s/(transaction.state.log.replication.factor)=(.*)/\1=$OFFSET_REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
+    sed -r -i "s/(offsets.topic.replication.factor)=(.*)/\1=$OFFSET_REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
 fi
 
 # Configure ISR for __customer_offsets
