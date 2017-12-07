@@ -16,7 +16,7 @@ fi
 
 if [ ! -z "$KAFKA_HOST" ] && [ ! -z "$KAFKA_PORT" ]; then
     echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT "
-    echo -n "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT " >> $KAFKA_HOME/config/server.properties
+    echo -e "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT " >> $KAFKA_HOME/config/server.properties
 fi
 
 # Set the broker id
@@ -50,7 +50,7 @@ fi
 # Enable/disable auto creation of topics
 if [ ! -z "$AUTO_CREATE_TOPICS" ]; then
     echo "auto.create.topics.enable: $AUTO_CREATE_TOPICS"
-    echo "auto.create.topics.enable=$AUTO_CREATE_TOPICS" >> $KAFKA_HOME/config/server.properties
+    echo -e "auto.create.topics.enable=$AUTO_CREATE_TOPICS" >> $KAFKA_HOME/config/server.properties
 fi
 
 # Configure the default number of log partitions per topic
