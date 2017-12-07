@@ -1,5 +1,5 @@
 FROM java:openjdk-8-jre
-MAINTAINER Jennifer
+MAINTAINER JEY & Jennifer
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV SCALA_VERSION 2.11
