@@ -16,6 +16,7 @@ fi
 
 if [ ! -z "$KAFKA_HOST" ] && [ ! -z "$KAFKA_PORT" ]; then
     echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT "
+    sed -r -i "s/(broker.id)=(.*)/\1=$KAFKA_ID/g" $KAFKA_HOME/config/server.properties
     echo -e "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT " >> $KAFKA_HOME/config/server.properties
 fi
 
@@ -59,12 +60,6 @@ if [ ! -z "$DELETE_TOPIC_ENABLE" ]; then
     sed -r -i "s/(delete.topic.enable)=(.*)/\1=$DELETE_TOPIC_ENABLE/g" $KAFKA_HOME/config/server.properties
 fi
 
-# Configure the default num of replication factor for all the topics
-if [ ! -z "$REPLICA_FACTOR" ]; then
-    echo "default.replication.factor: $REPLICA_FACTOR"
-    sed -r -i "s/(default.replication.factor)=(.*)/\1=$REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
-fi
-
 # Configure the default num of replication factor for __customer_offsets
 if [ ! -z "$OFFSET_REPLICA_FACTOR" ]; then
     echo "offsets.topic.replication.factor: $OFFSET_REPLICA_FACTOR"
@@ -79,6 +74,11 @@ if [ ! -z "$OFFSET_ISR" ]; then
     sed -r -i "s/(transaction.state.log.min.isr)=(.*)/\1=$OFFSET_ISR/g" $KAFKA_HOME/config/server.properties
 fi
 
+# Configure the default num of replication factor for all the topics
+if [ ! -z "$REPLICA_FACTOR" ]; then
+    echo "default.replication.factor: $REPLICA_FACTOR"
+    sed -r -i "s/(default.replication.factor)=(.*)/\1=$REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
+fi
 
 
 # Run Kafka
