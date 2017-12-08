@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo " " >> $KAFKA_HOME/config/server.properties
+
 if [ ! -z "$KAFKA_HOST" ]; then
     echo "advertised host: $KAFKA_HOST"
     sed -r -i "s/#(advertised.host.name)=(.*)/\1=$KAFKA_HOST/g" $KAFKA_HOME/config/server.properties
