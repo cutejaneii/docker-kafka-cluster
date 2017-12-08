@@ -16,7 +16,7 @@ fi
 
 if [ ! -z "$KAFKA_HOST" ] && [ ! -z "$KAFKA_PORT" ]; then
     echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT "
-    sed -r -i "s/#(advertised.listeners)=(.*)/\1=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT/g" $KAFKA_HOME/config/server.properties
+    echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT" >> $KAFKA_HOME/config/server.properties    
 fi
 
 # Set the broker id
@@ -76,7 +76,7 @@ fi
 # Configure the default num of replication factor for all the topics
 if [ ! -z "$REPLICA_FACTOR" ]; then
     echo "default.replication.factor: $REPLICA_FACTOR"
-    sed -r -i "s/(default.replication.factor)=(.*)/\1=$REPLICA_FACTOR/g" $KAFKA_HOME/config/server.properties
+    echo "default.replication.factor: $REPLICA_FACTOR" >> $KAFKA_HOME/config/server.properties
 fi
 
 
