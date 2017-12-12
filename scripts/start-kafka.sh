@@ -18,7 +18,7 @@ fi
 
 if [ ! -z "$KAFKA_HOST" ] && [ ! -z "$KAFKA_PORT" ]; then
     echo "advertised.listeners=PLAINTEXT://$KAFKA_HOST:$KAFKA_PORT "
-    sed -r -i "s/#(advertised.listeners=PLAINTEXT:\/\/)(.*)/\1=$KAFKA_HOST:$KAFKA_PORT/g" $KAFKA_HOME/config/server.properties
+    sed -r -i "s/#(advertised.listeners=PLAINTEXT:\/\/)(.*)/\1$KAFKA_HOST:$KAFKA_PORT/g" $KAFKA_HOME/config/server.properties
 fi
 
 # Set the broker id
