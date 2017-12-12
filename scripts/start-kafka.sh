@@ -52,7 +52,7 @@ fi
 # Enable/disable auto creation of topics
 if [ ! -z "$AUTO_CREATE_TOPICS" ]; then
     echo "auto.create.topics.enable: $AUTO_CREATE_TOPICS"
-    echo "auto.create.topics.enable=$AUTO_CREATE_TOPICS" >> /opt/$KAFKA_HOME/config/server.properties    
+    echo "auto.create.topics.enable=$AUTO_CREATE_TOPICS" >>  $KAFKA_HOME/config/server.properties    
 fi
 
 # Configure the default number of log partitions per topic
@@ -78,7 +78,7 @@ fi
 # Configure the default num of replication factor for all the topics
 if [ ! -z "$REPLICA_FACTOR" ]; then
     echo "default.replication.factor: $REPLICA_FACTOR"
-    echo "default.replication.factor: $REPLICA_FACTOR" >> /opt/$KAFKA_HOME/config/server.properties    
+    echo "default.replication.factor: $REPLICA_FACTOR" >> $KAFKA_HOME/config/server.properties    
 fi
 
 
